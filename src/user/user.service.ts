@@ -16,12 +16,16 @@ export class UserService {
     const createdUser = await this.prisma.user.create({
       data,
     });
+
     delete createdUser.password;
 
     return createdUser;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findByEmail(email: string) {
+    this.prisma.user.findUnique({
+      where: { email },
+    });
+    return;
   }
 }
